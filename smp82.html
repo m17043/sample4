@@ -8,11 +8,12 @@
   </head>
 
   <body>
-    <h1>背景色を付けた</h1>
-    <br>背景色をつけてみた</br>
+    <h1>第8回レポート</h1>
+    
+    <br>森の頭上を通る太陽</br>
     
     <script>
-      // ページの読み込みを待つ
+    // ページの読み込みを待つ
       window.addEventListener('load', init);
 
       function init() {
@@ -50,13 +51,6 @@
         // シーンに追加
         scene.add(directionalLight2);
 
-        // helper
-      const gridHelper = new THREE.GridHelper(200,50); // size, step
-      scene.add(gridHelper);
-
-      const axisHelper = new THREE.AxisHelper(200,50);
-      scene.add(axisHelper);
-
         // 木0をスプライトで作成
         var textureLoader = new THREE.TextureLoader();  
         var texture0 = textureLoader.load("img/tree0.png");
@@ -74,9 +68,9 @@
         const material1 = new THREE.SpriteMaterial({ map: texture1,});
 
         const sprite1 = new THREE.Sprite(material1);
-        sprite1.position.x = 100;
+        sprite1.position.x = 90;
         sprite1.position.y = 50;
-        sprite1.position.z = -100;
+        sprite1.position.z = -90;
         sprite1.scale.set(100,100,100);
         scene.add(sprite1);
 
@@ -85,21 +79,43 @@
         const material2 = new THREE.SpriteMaterial({ map: texture2,});
 
         const sprite2 = new THREE.Sprite(material2);
-        sprite2.position.x = -100;
+        sprite2.position.x = -90;
         sprite2.position.y = 50;
-        sprite2.position.z = -100;
+        sprite2.position.z = -90;
         sprite2.scale.set(100,100,100);
         scene.add(sprite2);
+        
+        // 木2をスプライトで作成 
+        var texture4 = textureLoader.load("img/tree2.png");
+        const material4 = new THREE.SpriteMaterial({ map: texture4,});
+
+        const sprite4 = new THREE.Sprite(material4);
+        sprite4.position.x = 90;
+        sprite4.position.y = 50;
+        sprite4.position.z = 90;
+        sprite4.scale.set(100,100,100);
+        scene.add(sprite4);
+        
+        // 木3をスプライトで作成 
+        var texture5 = textureLoader.load("img/tree2.png");
+        const material5 = new THREE.SpriteMaterial({ map: texture5,});
+
+        const sprite5 = new THREE.Sprite(material5);
+        sprite5.position.x = -90;
+        sprite5.position.y = 50;
+        sprite5.position.z = 90;
+        sprite5.scale.set(100,100,100);
+        scene.add(sprite5);
 
         
-        // 木1をスプライトで作成 
+        // 太陽をスプライトで作成 
         var texture3 = textureLoader.load("img/sun.png");
         const material3 = new THREE.SpriteMaterial({ map: texture3,});
 
         const sprite3 = new THREE.Sprite(material3);
-        sprite3.position.x = -100;
-        sprite3.position.y = 50;
-        sprite3.position.z = -100;
+        sprite3.position.x = 0;
+        sprite3.position.y = 150;
+        sprite3.position.z = 0;
         sprite3.scale.set(100,100,100);
         scene.add(sprite3);
 
