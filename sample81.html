@@ -85,7 +85,7 @@
         scene.add(sprite2);
 
         
-        // 木1をスプライトで作成 
+        // 太陽をスプライトで作成 
         var texture3 = textureLoader.load("img/sun.png");
         const material3 = new THREE.SpriteMaterial({ map: texture3,});
 
@@ -93,7 +93,7 @@
         sprite3.position.x = -100;
         sprite3.position.y = 50;
         sprite3.position.z = -100;
-        sprite3.scale.set(100,100,100);
+        sprite3.scale.set(0,100,0);
         scene.add(sprite3);
 
         tick();
