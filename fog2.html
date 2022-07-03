@@ -23,7 +23,7 @@
         const scene = new THREE.Scene();
 
         // フォグを設定
-        //scene.fog = new THREE.Fog(0x000000, 50, 2000);
+        scene.fog = new THREE.Fog(0x000000, 50, 2000);
 
         // カメラを作成
         const camera = new THREE.PerspectiveCamera(45, width / height);
@@ -41,30 +41,36 @@
         sphere.position.y = 35;
         sphere.rotation.set(0,0,Math.PI/11.5); 
         scene.add( sphere );
-*/
+        */
 
-var textureLoader = new THREE.TextureLoader();  
-        var texture0 = textureLoader.load("img/innseki2.jpg");
-        const material0 = new THREE.SpriteMaterial({ map: texture0,});
+        const txLoader  = new THREE.TextureLoader();
+        const normalMap = txLoader.load("img/earth.png");
 
-        const sprite0 = new THREE.Sprite(material0);
-        sprite0.position.x = 0;
-        sprite0.position.y = 50;
-        sprite0.position.z = 0;
-        sprite0.scale.set(100,100,100);
-        scene.add(sprite0);
+        const sphereGeometry = new THREE.SphereGeometry( 200, 150, 150 );
+        const sphereMaterial = new THREE. MeshPhongMaterial( { color: 0xffffff, 
+          map:normalMap 
+        
+        } );
+      
+        const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
+        sphere.position.set( 0, 0, -5 );
+        scene.add( sphere );
 
-
+   
         // グループを作成・土星リングを作成
         const group = new THREE.Group();
         scene.add(group);
-        const geometry = new THREE.BoxBufferGeometry(5, 5, 5);
-        const material = new THREE.MeshStandardMaterial();
+        const geometry = new THREE.SphereGeometry( 5, 5, 5 );
+        const material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF} );
+
 
         for (let i = 0; i < 50; i++) {
             for(let j = 0; j < 50; j++){
 
             const mesh = new THREE.Mesh(geometry, material);
+            mesh.scale.x = Math.random();
+            mesh.scale.y = Math.random();
+            mesh.scale.z = Math.random();
             /*
             mesh.position.x = (Math.random() - 0.5) * 1000;
             mesh.position.y = (Math.random() - 0.5) * 10;
