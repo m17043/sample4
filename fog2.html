@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://unpkg.com/three@0.140.2/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.137.4/examples/js/controls/OrbitControls.js"></script>
+    <script>
+      // ページの読み込みを待つ
+      window.addEventListener('DOMContentLoaded', init);
+
+      function init() {
+        // サイズを指定
+        const width = 960;
+        const height = 540;
+
+        // レンダラーを作成
+        const canvasElement = document.querySelector('#myCanvas');
+        const renderer = new THREE.WebGLRenderer({
+          canvas: canvasElement,
+        });
+        renderer.setSize(width, height);
+
+        // シーンを作成
+        const scene = new THREE.Scene();
+
+        // フォグを設定
+        //scene.fog = new THREE.Fog(0x000000, 50, 2000);
+
+        // カメラを作成
+        const camera = new THREE.PerspectiveCamera(45, width / height);
+        // カメラの初期座標を設定
+        camera.position.set(0, 0, 1000);
+
+        // カメラコントローラーを作成
+        const controls = new THREE.OrbitControls(camera, canvasElement);
+
+       /* 
+        //惑星を作成
+        const geometry1 = new THREE.SphereGeometry( 150, 150, 150 );
+        const material1 = new THREE.MeshBasicMaterial( {color: 0xFFFF00} );
+        const sphere = new THREE.Mesh( geometry1, material1 );
+        sphere.position.y = 35;
+        sphere.rotation.set(0,0,Math.PI/11.5); 
+        scene.add( sphere );
+*/
+
+var textureLoader = new THREE.TextureLoader();  
+        var texture0 = textureLoader.load("img/tree0.png");
+        const material0 = new THREE.SpriteMaterial({ map: texture0,});
+
+        const sprite0 = new THREE.Sprite(material0);
+        sprite0.position.x = 0;
+        sprite0.position.y = 50;
+        sprite0.position.z = 0;
+        sprite0.scale.set(100,100,100);
+        scene.add(sprite0);
+
+
+        // グループを作成・土星リングを作成
+        const group = new THREE.Group();
+        scene.add(group);
+        const geometry = new THREE.BoxBufferGeometry(5, 5, 5);
+        const material = new THREE.MeshStandardMaterial();
+
+        for (let i = 0; i < 50; i++) {
+            for(let j = 0; j < 50; j++){
+
+            const mesh = new THREE.Mesh(geometry, material);
+            /*
+            mesh.position.x = (Math.random() - 0.5) * 1000;
+            mesh.position.y = (Math.random() - 0.5) * 10;
+            mesh.position.z = (Math.random() - 0.5) * 1000;
+            */
+
+            const radian = i / 50 * Math.PI * 2;
+            mesh.position.set(
+                (Math.random() - 2) * (200 + j) * Math.cos(radian), // X座標
+                30, // Y座標
+                (Math.random() - 2) * (200 + j)* Math.sin(radian) // Z座標
+                );                   
+        
+          
+          /*
+          mesh.rotation.x = Math.random() * 2 * Math.PI;
+          mesh.rotation.y = Math.random() * 2 * Math.PI;
+          mesh.rotation.z = Math.random() * 2 * Math.PI;
+          */
+          // グループに格納する
+            group.add(mesh);
+
+            group.rotation.set(0,0,Math.PI/11.5); 
+            
+        }
+        }
+
+        // 光源
+        scene.add(new THREE.DirectionalLight(0xff0000, 2)); // 平行光源
+        scene.add(new THREE.AmbientLight(0x00ffff)); // 環境光源
+
+
+        tick();
+
+        // 毎フレーム時に実行されるループイベントです
+        function tick() {
+          // レンダリング
+          //sphere.rotateY(0.01);
+          group.rotateY(0.01);
+          renderer.render(scene, camera);
+          requestAnimationFrame(tick);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+  </body>
+</html>
