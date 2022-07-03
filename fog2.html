@@ -55,6 +55,7 @@
         const sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
         sphere.position.set( 0, 0, -5 );
         sphere.rotation.set(0,0,Math.PI/11.5); 
+        sphere.receiveShadow = true;
         scene.add( sphere );
 
    
