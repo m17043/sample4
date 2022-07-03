@@ -38,7 +38,7 @@
         const geometry1 = new THREE.SphereGeometry( 150, 150, 150 );
         const material1 = new THREE.MeshBasicMaterial( {color: 0xFFFF00} );
         const sphere = new THREE.Mesh( geometry1, material1 );
-        sphere.position.y = 35;
+        sphere.position.y = 36;
         sphere.rotation.set(0,0,Math.PI/11.5); 
         scene.add( sphere );
         */
@@ -112,8 +112,8 @@
         // 毎フレーム時に実行されるループイベントです
         function tick() {
           // レンダリング
-          sphere.rotateY(0.008);
-          group.rotateY(0.008);
+          sphere.rotateY(0.005);
+          group.rotateY(0.005);
           renderer.render(scene, camera);
           requestAnimationFrame(tick);
         }
