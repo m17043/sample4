@@ -18,6 +18,9 @@
           canvas: canvasElement,
         });
         renderer.setSize(width, height);
+        
+        // レンダラー：シャドウを有効にする
+        renderer.shadowMap.enabled = true;
 
         // シーンを作成
         const scene = new THREE.Scene();
